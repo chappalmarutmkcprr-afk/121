@@ -119,12 +119,11 @@ INVIS_SUFFIXES = ["\u200b", "\u200c", "\u200d", "\u2060", "\ufeff",
 
 class DotCommandHandler(BaseHandler):
     def __init__(self, command, callback, filters_=None):
-        super().__init__()
+        super().__init__(callback)
         self.commands = [command.lower()] if isinstance(command, str) else [c.lower() for c in command]
         self.callback = callback
         self.filters_ = filters_
         self.block = True
-
     def check_update(self, update):
         if not isinstance(update, Update) or not update.effective_message: return None
         msg = update.effective_message
